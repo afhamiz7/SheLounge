@@ -1,0 +1,128 @@
+/* Ensure the button is hidden initially and only shows on hover */
+.button-container {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0s ease-in-out 0.3s;
+}
+
+.card:hover .button-container {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s; /* Button becomes visible immediately after hover */
+}
+
+.shop-now-btn {
+  transition: all 0.3s ease;
+}
+
+.shop-now-btn:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05); /* Slight scale effect when hovered */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .shop-now-btn {
+    width: 100%; /* Full width on smaller screens */
+  }
+  .carousel-responsive .carousel-item img {
+    height: 50vh;
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 769px) {
+  .shop-now-btn {
+    width: 100%; /* Full width on larger screens as well */
+  }
+  .carousel-responsive .carousel-item img {
+    height: 70vh;
+    object-fit: cover;
+  }
+}
+/* ShopByCategory.css */
+/* Default layout for large screens */
+.rotate-card {
+  transition: transform 0.3s ease-out; /* Smooth transition for zoom effect */
+}
+
+/* Zoom effect when the card comes into view */
+.rotate-card.rotate {
+  transform: scale(1.05); /* Slight zoom-in effect */
+}
+
+/* Mobile view - full screen width */
+@media (max-width: 640px) {
+  .rotate-row {
+    flex-direction: column; /* Stack the cards vertically */
+  }
+
+  .rotate-card {
+    width: 100%; /* Full width for each card */
+    margin-bottom: 1rem; /* Space between cards */
+  }
+
+  /* Apply the zoom effect to the card on mobile */
+  .rotate-card.rotate {
+    transform: scale(1.1); /* Stronger zoom-in effect */
+  }
+
+  .shop-category-image {
+    width: 100%; /* Ensure the image takes full width */
+    height: auto; /* Maintain aspect ratio */
+  }
+}
+/* Login.css */
+/* Login.css */
+
+.perspective {
+  perspective: 1000px;
+}
+
+@keyframes tripleFlipReset {
+  0% {
+    transform: rotateY(0deg);
+  }
+  10% {
+    transform: rotateY(180deg);
+  }
+  20% {
+    transform: rotateY(360deg);
+  }
+  30% {
+    transform: rotateY(540deg);
+  }
+  40% {
+    transform: rotateY(0deg); /* Reset back to front side */
+  }
+  100% {
+    transform: rotateY(0deg); /* Stay at original position during pause */
+  }
+}
+
+.animate-triple-flip-reset {
+  animation: tripleFlipReset 4s linear infinite;
+  transform-style: preserve-3d;
+}
+
+
+/* Glowing Star Animation */
+@keyframes golden-glow {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px #f6e27a);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 6px #f6e27a);
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px #f6e27a);
+  }
+}
+
+.glowing-star {
+  color: #FFD700; /* Pure gold */
+  animation: golden-glow 2s infinite ease-in-out;
+}
