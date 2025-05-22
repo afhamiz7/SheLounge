@@ -90,7 +90,7 @@ const Login = ({ isOpen, onClose }) => {
                       className="w-4 h-4 accent-[#25D366] cursor-pointer"
                     />
                     <label htmlFor="terms" className="text-xs text-white cursor-pointer">
-                      I agree to the Terms & Conditions
+                      Notify me for any updates & offers
                     </label>
                   </div>
 

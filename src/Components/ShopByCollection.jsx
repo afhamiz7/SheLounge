@@ -1,116 +1,151 @@
-import * as React from 'react';
-import { useState } from 'react';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardActionArea from '@mui/material/CardActionArea';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  Card,
+  CardMedia,
+  CardActionArea,
+  IconButton,
+  Button,
+  Box,
+} from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ImgData from './data2';
+import ImgData from './data';
+import { useWishlist } from './MyContext';
+import { useMediaQuery, useTheme } from '@mui/material';
 
-export default function ActionAreaCard() {
-  // Keep track of which items are favorited
-  const [favorites, setFavorites] = useState({});
+const ShopByCollection = () => {
+  const remainingItems = ImgData.slice(8);
+  const { wishlistItems, toggleWishlistItem } = useWishlist();
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // Check for mobile view
 
-  const toggleFavorite = (index) => {
-    setFavorites((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }));
+  // State to manage visible cards
+  const [visibleCards, setVisibleCards] = useState(isMobile ? 3 : remainingItems.length);
+
+  const isItemLiked = (itemId) =>
+    wishlistItems.some((i) => i.id === itemId);
+
+  const toggleWishlistAndNavigate = (item) => {
+    toggleWishlistItem(item);
+  };
+
+  const handleShowMore = () => {
+    setVisibleCards(remainingItems.length); // Show all cards when "Show More" is clicked
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '24px',
-        padding: '0 20px',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        justifyContent: 'center',
-      }}
-    >
-      {ImgData.map((items, index) => (
-        <Card
-          key={index}
-          sx={{
-            width: '100%',
-            maxWidth: 280,
-            overflow: 'hidden',
-            boxShadow: 3,
-            position: 'relative',
-            '&:hover .hoverContent': {
-              opacity: 1,
-            },
-            '&:hover img': {
-              transform: 'scale(1.05)',
-            },
-          }}
-        >
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              image={items.imgsrc}
-              alt="new arrivals"
-              sx={{
-                transition: 'transform 0.3s ease',
-              }}
-            />
-          </CardActionArea>
-
-          {/* Heart Icon Toggle */}
-          <IconButton
-            onClick={() => toggleFavorite(index)}
+    <>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '24px',
+          padding: '0 20px',
+          justifyContent: 'center',
+          marginTop: '40px',
+        }}
+      >
+        {/* Loop through items and show only the visible ones */}
+        {remainingItems.slice(0, visibleCards).map((item) => (
+          <Card
+            key={item.id}
             sx={{
-              position: 'absolute',
-              top: 8,
-              right: 8,
-              backgroundColor: 'rgba(241, 218, 218, 0.75)',
-              '&:hover': {
-                backgroundColor: 'rgba(255,255,255,1)',
-              },
-              zIndex: 15,
+              width: '100%',
+              maxWidth: 280,
+              overflow: 'hidden',
+              boxShadow: 3,
+              position: 'relative',
+              '&:hover .hoverContent': { opacity: 1 },
+              '&:hover img': { transform: 'scale(1.05)' },
             }}
           >
-            {favorites[index] ? (
-              <FavoriteIcon color="error" />
-            ) : (
-              <FavoriteBorderIcon color="error" />
-            )}
-          </IconButton>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                image={item.imgsrc}
+                alt={item.name}
+                loading="lazy"
+                sx={{ transition: 'transform 0.3s ease' }}
+              />
+            </CardActionArea>
 
-          {/* Hover Button */}
-          <Box
-            className="hoverContent"
-            sx={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              py: 2,
-              opacity: 0,
-              transition: 'opacity 0.3s ease',
-              zIndex: 10,
-            }}
-          >
-            <Button
+            <IconButton
+              onClick={() => toggleWishlistAndNavigate(item)}
               sx={{
-                width: '250px',
-                color: 'white',
-                background: 'black',
+                position: 'absolute',
+                top: 8,
+                right: 8,
+                backgroundColor: isItemLiked(item.id)
+                  ? 'rgba(255, 0, 0, 0.2)'
+                  : 'rgba(247, 223, 223, 0.75)',
+                '&:hover': {
+                  backgroundColor: isItemLiked(item.id)
+                    ? 'rgba(255, 0, 0, 0.4)'
+                    : 'rgba(255,255,255,1)',
+                },
               }}
             >
-              SHOP NOW
-            </Button>
-          </Box>
-        </Card>
-      ))}
-    </div>
+              {isItemLiked(item.id) ? (
+                <FavoriteIcon color="error" />
+              ) : (
+                <FavoriteBorderIcon color="error" />
+              )}
+            </IconButton>
+
+            <Box
+              className="hoverContent"
+              sx={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                py: 2,
+                opacity: 0,
+                transition: 'opacity 0.3s ease',
+              }}
+            >
+              <Link to={`/product/${item.id}`} style={{ textDecoration: 'none' }}>
+                <Button
+                  sx={{ width: '250px', color: 'white', background: 'black' }}
+                >
+                  QUICK VIEW
+                </Button>
+              </Link>
+            </Box>
+          </Card>
+        ))}
+      </div>
+
+      {/* Show More Button (Mobile Only) */}
+      {isMobile && visibleCards < remainingItems.length && (
+        <div className="flex justify-center mt-[30px]">
+          <button
+            onClick={handleShowMore}
+            className="bg-black text-white w-[150px] h-[40px]"
+          >
+            SHOW MORE
+          </button>
+        </div>
+      )}
+
+      {/* For desktop view, show all items without "Show More" */}
+      {!isMobile && (
+        <div className="flex justify-center mt-[30px]">
+          <button
+            onClick={() => navigate('')}
+            className="bg-black text-white w-[150px] h-[40px]"
+          >
+            VIEW MORE
+          </button>
+        </div>
+      )}
+    </>
   );
-}
+};
+
+export default ShopByCollection;
