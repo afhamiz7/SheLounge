@@ -40,21 +40,21 @@ const Login = ({ isOpen, onClose }) => {
               {/* Cards with Animated Icons */}
               <div className="flex w-full justify-between gap-8">
                 {/* Card 1 */}
-                <div className="bg-black p-4 rounded-md shadow-md flex flex-col items-center w-[30%] h-[250px] text-white">
+                <div className="bg-black p-4 rounded-md shadow-md flex flex-col items-center w-[30%] h-[250px] text-white transition-transform duration-300 hover:scale-105">
                   <AssignmentReturnIcon />
                   <p className="text-center font-semibold mb-1">Hassle-Free Returns</p>
                   <p className="text-center text-sm">Worry-free shopping with our easy return policy!</p>
                 </div>
 
                 {/* Card 2 */}
-                <div className="bg-black p-4 rounded-md shadow-md flex flex-col items-center w-[30%] h-[250px] text-white">
+                <div className="bg-black p-4 rounded-md shadow-md flex flex-col items-center w-[30%] h-[250px] text-white transition-transform duration-300 hover:scale-105">
                   <DeliveryDiningIcon />
                   <p className="text-center font-semibold mb-1">Fast Delivery</p>
                   <p className="text-center text-sm">Get your items quickly with our delivery service.</p>
                 </div>
 
                 {/* Card 3 */}
-                <div className="bg-black p-4 rounded-md shadow-md flex flex-col items-center w-[30%] h-[250px] text-white">
+                <div className="bg-black p-4 rounded-md shadow-md flex flex-col items-center w-[30%] h-[250px] text-white transition-transform duration-300 hover:scale-105">
                   <PaymentsIcon />
                   <p className="text-center font-semibold mb-1">Secure Payment</p>
                   <p className="text-center text-sm">Your transactions are protected with encryption.</p>
@@ -63,7 +63,7 @@ const Login = ({ isOpen, onClose }) => {
             </div>
 
             {/* Login Form Section */}
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center transition-transform duration-300 hover:scale-110">
               <div className="ml-[100px] bg-black w-[300px] h-[400px] flex justify-center items-center rounded-md shadow-md">
                 <form className="w-full flex flex-col items-center px-4 text-center">
                   {/* Top Small Text */}
@@ -96,7 +96,7 @@ const Login = ({ isOpen, onClose }) => {
 
                   {/* WhatsApp Login Button */}
                   <button
-                    className="w-[250px] py-2 text-white bg-[#25D366] border border-[#1DA851] rounded-2xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                    className="w-[250px] py-2 text-white bg-[#25D366] border border-[#1DA851] rounded-2xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 transition-transform duration-300 hover:scale-105"
                     type="submit"
                   >
                     <WhatsAppIcon />

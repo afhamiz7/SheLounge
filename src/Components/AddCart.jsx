@@ -178,7 +178,7 @@ const AddCart = () => {
       {/* Payment Overlay */}
       {showPayment && selectedItem && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-2 md:px-0">
-          <div className="bg-[#ebe3d8] rounded shadow-lg w-[350px] h-[600px] md:w-[900px] md:h-auto flex flex-col md:flex-row relative overflow-y-auto md:overflow-visible">
+          <div className="bg-[#ebe3d8] rounded shadow-lg w-[350px] h-[600px] md:w-[1000px] md:h-[500px] flex flex-col md:flex-row relative overflow-y-auto md:overflow-visible">
             {/* Close Button */}
             <button
               onClick={closePayment}
@@ -197,7 +197,7 @@ const AddCart = () => {
             </div>
 
             {/* Product Info */}
-            <div className="md:w-1/2 p-4 flex flex-col items-center md:items-start order-2 md:order-none">
+            <div className="md:w-4/6 p-4 flex flex-col items-center md:items-start order-2 md:order-none">
               <img
                 src={selectedItem.images?.[4]}
                 className="w-full h-[200px] object-cover rounded md:w-full"

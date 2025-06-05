@@ -17,6 +17,7 @@ export const WishlistProvider = ({ children }) => {
       }
     });
   };
+  const isInWishlist = (id) => wishlistItems.some((item) => item.id === id);
 
   const addToCart = (item) => {
     const exists = cartItems.find((i) => i.id === item.id);
@@ -34,6 +35,7 @@ export const WishlistProvider = ({ children }) => {
       value={{
         wishlistItems,
         toggleWishlistItem,
+        isInWishlist,
         cartItems,
         addToCart,
         removeFromCart,

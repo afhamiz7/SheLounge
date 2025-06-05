@@ -13,20 +13,22 @@ import { useWishlist } from './MyContext';
 import { useMediaQuery, useTheme } from '@mui/material';
 
 export default function NewArrivals() {
-  const firstEightItems = ImgData.slice(0, 8);
+  const firstEightItems = ImgData.slice(0, 8); 
   const { wishlistItems, toggleWishlistItem } = useWishlist();
   const navigate = useNavigate();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // This checks for mobile screen size
+  const isMobile = useMediaQuery(theme.breakpoints.down('md')); 
 
-  // State to manage the visible cards
   const [visibleCards, setVisibleCards] = useState(isMobile ? 3 : firstEightItems.length);
 
-  const isItemLiked = (itemId) =>
-    wishlistItems.some((i) => i.id === itemId);
+  const isItemLiked = (itemId) => wishlistItems.some((i) => i.id === itemId);
 
   const handleShowMore = () => {
-    setVisibleCards(firstEightItems.length); // Show all cards when "Show More" is clicked
+    setVisibleCards(firstEightItems.length); 
+  };
+
+  const handleViewMore = () => {
+    navigate('/Allproduct', { state: { category: 'NEW ARRIVELS' } });
   };
 
   return (
@@ -40,7 +42,6 @@ export default function NewArrivals() {
           justifyContent: 'center',
         }}
       >
-        {/* Loop through items and show only the visible ones */}
         {firstEightItems.slice(0, visibleCards).map((item) => (
           <Card
             key={item.id}
@@ -54,7 +55,7 @@ export default function NewArrivals() {
               '&:hover img': { transform: 'scale(1.05)' },
             }}
           >
-            <CardActionArea>
+            <CardActionArea onClick={() => navigate(`/product/${item.id}`)}>
               <CardMedia
                 component="img"
                 image={item.imgsrc}
@@ -112,7 +113,6 @@ export default function NewArrivals() {
         ))}
       </div>
 
-      {/* Show More Button (Mobile Only) */}
       {isMobile && visibleCards < firstEightItems.length && (
         <div className="flex justify-center mt-[30px]">
           <button
@@ -124,11 +124,10 @@ export default function NewArrivals() {
         </div>
       )}
 
-      {/* For desktop view, show all items without "Show More" */}
       {!isMobile && (
         <div className="flex justify-center mt-[30px]">
           <button
-            onClick={() => navigate('')}
+            onClick={handleViewMore}  
             className="bg-black text-white w-[150px] h-[40px]"
           >
             VIEW MORE

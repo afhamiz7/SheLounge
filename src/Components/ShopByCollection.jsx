@@ -32,8 +32,11 @@ const ShopByCollection = () => {
   };
 
   const handleShowMore = () => {
-    setVisibleCards(remainingItems.length); // Show all cards when "Show More" is clicked
+    setVisibleCards(remainingItems.length); 
   };
+  const handleViewMore =()=>{
+    navigate('/Allproduct',{state:{category:'party-wears'}})
+  }
 
   return (
     <>
@@ -48,7 +51,7 @@ const ShopByCollection = () => {
         }}
       >
         {/* Loop through items and show only the visible ones */}
-        {remainingItems.slice(0, visibleCards).map((item) => (
+        {remainingItems.slice(0,8, visibleCards).map((item) => (
           <Card
             key={item.id}
             sx={{
@@ -61,7 +64,7 @@ const ShopByCollection = () => {
               '&:hover img': { transform: 'scale(1.05)' },
             }}
           >
-            <CardActionArea>
+            <CardActionArea onClick={() => navigate(`/product/${item.id}`)}>
               <CardMedia
                 component="img"
                 image={item.imgsrc}
@@ -133,11 +136,10 @@ const ShopByCollection = () => {
         </div>
       )}
 
-      {/* For desktop view, show all items without "Show More" */}
       {!isMobile && (
         <div className="flex justify-center mt-[30px]">
           <button
-            onClick={() => navigate('')}
+            onClick={handleViewMore}
             className="bg-black text-white w-[150px] h-[40px]"
           >
             VIEW MORE

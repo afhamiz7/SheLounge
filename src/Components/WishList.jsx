@@ -24,7 +24,7 @@ const WishList = () => {
         <h5 className='cursor-pointer'>Home</h5>
         </div>
 
-      <div className="flex flex-wrap justify-center gap-6 p-4">
+      <div className="flex flex-wrap justify-center gap-6 p-4 ">
         {wishlistItems.length === 0 ? (
           <p>No items in wishlist.</p>
         ) : (
@@ -62,7 +62,7 @@ const WishList = () => {
                 <p className="font-[600]">{item.description}</p>
                 <h3>{item.price}</h3>
                 <Link to={`/product/${item.id}`}>
-                  <button className="bg-black w-full h-[40px] text-white"
+                  <button className="bg-black w-full h-[40px] text-white transition-transform duration-100 hover:scale-105"
                   >
                     QUICK VIEW
                   </button>

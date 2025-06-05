@@ -4,6 +4,7 @@ import ImgData from "./data";
 import Navbar from "./Navbar";
 import { FiShoppingCart } from "react-icons/fi";
 import { useWishlist } from "./MyContext";
+import ReactImageMagnify from 'react-image-magnify';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -38,15 +39,16 @@ const ProductDetails = () => {
       {/* Desktop View */}
       <div className="hidden md:flex gap-3 mt-4 px-6">
         {/* Thumbnails */}
-        <div className="flex flex-col gap-3 ml-2">
+        <div className="flex flex-col gap-3 ml-2 ">
           {product.images.map((img, index) => (
             <img
+            className="transition-transform duration-200 hover:scale-105"
               key={index}
               src={img}
               alt={`pose-${index}`}
               style={{
-                width: "80px",
-                height: "83px",
+                width: "100px",
+                height: "100px",
                 objectFit: "cover",
                 border:
                   img === mainImage ? "2px solid black" : "1px solid gray",
@@ -58,17 +60,42 @@ const ProductDetails = () => {
         </div>
 
         {/* Main Image */}
-        <img
-          src={mainImage}
-          alt={product.name}
-          className="w-[400px] h-[480px] ml-2"
-        />
+        
+<div className="border w-fit">
+  <ReactImageMagnify
+    {...{
+      smallImage: {
+        alt: product.name,
+        isFluidWidth: false,
+        width: 500,
+        height: 580,
+        src: mainImage,
+      },
+      largeImage: {
+        src: mainImage,
+        width: 2000,
+        height: 2000, 
+      },
+      enlargedImageContainerDimensions: {
+        width: '270%',
+        height: '100%',
+      },
+      enlargedImageContainerStyle: {
+        zIndex: 9,
+        border: '1px solid #ccc',
+        backgroundColor: '#fff',
+      },
+      enlargedImagePosition: 'beside', 
+      isHintEnabled: true,
+      shouldHideHintAfterFirstActivation: false,
+    }}
+  />
+</div>
 
         {/* Product Info */}
         <div className="space-y-6 ml-4">
           <h1 className="text-2xl font-semibold">{product.description}</h1>
           <h4 className="text-xl font-bold">{product.price}</h4>
-
           <div className="border-b border-gray-300" />
 
           <p className="text-lg font-medium">SIZE</p>
@@ -79,8 +106,8 @@ const ProductDetails = () => {
                 onClick={() => setSelectedSize(size)}
                 className={`h-[50px] w-[50px] transition ${
                   selectedSize === size
-                    ? "bg-white text-black border-2 border-black"
-                    : "bg-black text-white border hover:bg-white hover:text-black"
+                    ? "bg-white text-black border-2 border-black "
+                    : "bg-black text-white border hover:bg-white hover:text-black transition-transform duration-100 hover:scale-105"
                 }`}
               >
                 {size}
@@ -92,7 +119,7 @@ const ProductDetails = () => {
 
           <div className="mt-4">
             <button
-              className="flex items-center justify-center gap-2 px-4 py-2 w-[500px] border border-black rounded bg-black text-white"
+              className="flex items-center justify-center gap-2 px-4 py-2 w-[500px] border border-black rounded bg-black text-white transition-transform duration-500 hover:scale-105"
               onClick={() => {
                 if (!selectedSize) {
                   alert("Please select a size.");
@@ -154,8 +181,8 @@ const ProductDetails = () => {
                 onClick={() => setSelectedSize(size)}
                 className={`h-[50px] w-[50px] transition ${
                   selectedSize === size
-                    ? "bg-white text-black border-2 border-black"
-                    : "bg-black text-white border hover:bg-white hover:text-black"
+                    ? "bg-white text-black border-2 border-black "
+                    : "bg-black text-white border hover:bg-white hover:text-black transition-transform duration-100 hover:scale-105"
                 }`}
               >
                 {size}

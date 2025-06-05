@@ -35,13 +35,13 @@ const Navbar = () => {
   };
 
   const menuLinks = [
-    { name: "NEW ARRIVALS", category: "new-arrivals" },
-    { name: "ETHNIC WEARS", category: "ethnic-wears" },
-    { name: "DRESSES", category: "dresses" },
-    { name: "SALVAR", category: "salvar" },
-    { name: "TOP & SHIRT", category: "top-and-shirt" },
-    { name: "WESTERN WEARS", category: "western-wears" },
-    { name: "PARTY WEARS", category: "party-wears" },
+    { name: "NEW ARRIVALS", category: "NEW ARRIVELS" },
+    { name: "ETHNIC WEARS", category: "ETHNIC WEAR" },
+    { name: "DRESSES", category: "DRESSES" },
+    { name: "SALVAR", category: "SALVAR" },
+    { name: "TOP & SHIRT", category: "TOP/SHIRT" },
+    { name: "WESTERN WEARS", category: "WESTERN WEAR" },
+    { name: "PARTY WEARS", category: "PARTY WEAR" },
   ];
 
   return (
@@ -95,7 +95,9 @@ const Navbar = () => {
 
             {/* Desktop Icons */}
             <div
-              className={`hidden md:flex gap-3 ${showSearch ? "hidden" : "flex"}`}
+              className={`hidden md:flex gap-3 ${
+                showSearch ? "hidden" : "flex"
+              }`}
             >
               <PersonIcon
                 onClick={toggleLoginOverlay}
@@ -114,7 +116,9 @@ const Navbar = () => {
 
             {/* Mobile Icons */}
             <div
-              className={`flex md:hidden gap-3 ${showSearch ? "hidden" : "flex"}`}
+              className={`flex md:hidden gap-3 ${
+                showSearch ? "hidden" : "flex"
+              }`}
             >
               <FavoriteBorderIcon
                 onClick={() => navigate("/wishlist")}
@@ -126,7 +130,10 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <div className="md:hidden">
-              <MenuIcon onClick={toggleMenu} className="cursor-pointer w-6 h-6" />
+              <MenuIcon
+                onClick={toggleMenu}
+                className="cursor-pointer w-6 h-6"
+              />
             </div>
           </div>
         </div>
@@ -168,12 +175,13 @@ const Navbar = () => {
                 <li
                   key={index}
                   onClick={toggleMenu}
-                  className="cursor-pointer border-b border-gray-300 pb-2"
+                  className="cursor-pointer border-b text-[#5d3620] border-gray-300 pb-2"
                 >
                   <Link
                     to="/Allproduct"
                     state={{ category: link.category }}
-                    className="text-[#5d3620]"
+                    className="text-[#5d3620] no-underline hover:no-underline"
+                    style={{ color: "#5d3620", textDecoration: "none" }}
                   >
                     {link.name}
                   </Link>
